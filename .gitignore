@@ -28,3 +28,5 @@ name_silo-*.tar
 
 # Elixir LS
 /.elixir_ls
+
+/config/*.secret.exs

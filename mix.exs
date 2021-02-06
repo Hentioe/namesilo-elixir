@@ -29,7 +29,8 @@ defmodule NameSilo.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:elixir_xml_to_map, "~> 2.0"},
       {:httpoison, "~> 1.8"},
-      {:typed_struct, "~> 0.2.1"}
+      {:typed_struct, "~> 0.2.1"},
+      {:atomic_map, "~> 0.9.3"}
     ]
   end
 end
