@@ -1,4 +1,4 @@
-import Mix.Config
+import Config
 
 config :name_silo, sandbox: true
 

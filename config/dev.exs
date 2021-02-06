@@ -1,3 +1,3 @@
-import Mix.Config
+import Config
 
 import_config "dev.secret.exs"
