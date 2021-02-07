@@ -78,6 +78,6 @@ defmodule NameSilo.Request do
   def parse_reply!(xml_text) do
     %{"namesilo" => %{"reply" => reply = %{"code" => code}}} = XmlToMap.naive_map(xml_text)
 
-    reply |> Map.put("code", String.to_integer(code)) |> AtomicMap.convert()
+    reply |> Map.put("code", String.to_integer(code)) |> AtomicMap.convert(%{safe: false})
   end
 end

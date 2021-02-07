@@ -3,14 +3,17 @@ defmodule NameSilo do
   Documentation for `NameSilo`.
   """
 
+  require NameSilo.DSL
+  import NameSilo.DSL
+
   @doc """
   ## Examples
 
-    ### Default usage
+    Default usage
       iex> NameSilo.api_root() # Read the `sandbox` in the configuration by default.
       "https://sandbox.namesilo.com/api"
 
-    ### Use options
+    Use options
       iex> NameSilo.api_root(sandbox: false, suffix: true)
       "https://www.namesilo.com/api/"
 
@@ -37,4 +40,22 @@ defmodule NameSilo do
 
     root <> path
   end
+
+  def_api("registerDomain", required: ["domain", "years"])
+  def_api("listRegisteredNameServers", required: ["domain"])
+
+  # TODO: 待上报。
+  # 此 API 疑似有 BUG，无法将域名作为 ip 参数的值。
+  # 相关错误："IPv6 is not properly formatted or not in a publicly routable address space"。
+  def_api("addRegisteredNameServer", required: ["domain", "new_host", "ip1", "ip2"])
+  # TODO: 待上报，同 `addRegisteredNameServer` API。
+  def_api("modifyRegisteredNameServer",
+    required: ["domain", "current_host", "new_host", "ip1", "ip2"]
+  )
+
+  def_api("deleteRegisteredNameServer", required: ["domain", "current_host"])
+  def_api("dnsListRecords", required: ["domain"])
+  def_api("dnsAddRecord", required: ["domain", "rrtype", "rrhost", "rrvalue"])
+  def_api("dnsUpdateRecord", required: ["domain", "rrid", "rrhost", "rrvalue"])
+  def_api("dnsDeleteRecord", required: ["domain", "rrid"])
 end
