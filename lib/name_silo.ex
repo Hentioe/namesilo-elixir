@@ -58,4 +58,6 @@ defmodule NameSilo do
   def_api("dnsAddRecord", required: ["domain", "rrtype", "rrhost", "rrvalue"])
   def_api("dnsUpdateRecord", required: ["domain", "rrid", "rrhost", "rrvalue"])
   def_api("dnsDeleteRecord", required: ["domain", "rrid"])
+  def_api("configureEmailForward", required: ["domain", "email", "forward1"])
+  def_api("deleteEmailForward", required: ["domain", "email"])
 end
