@@ -47,10 +47,10 @@ defmodule NameSilo do
   # TODO: 待上报。
   # 此 API 疑似有 BUG，无法将域名作为 ip 参数的值。
   # 相关错误："IPv6 is not properly formatted or not in a publicly routable address space"。
-  def_api("addRegisteredNameServer", required: ["domain", "new_host", "ip1", "ip2"])
+  def_api("addRegisteredNameServer", required: ["domain", "new_host", "ip1"])
   # TODO: 待上报，同 `addRegisteredNameServer` API。
   def_api("modifyRegisteredNameServer",
-    required: ["domain", "current_host", "new_host", "ip1", "ip2"]
+    required: ["domain", "current_host", "new_host", "ip1"]
   )
 
   def_api("deleteRegisteredNameServer", required: ["domain", "current_host"])
