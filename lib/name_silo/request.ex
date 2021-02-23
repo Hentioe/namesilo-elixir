@@ -9,6 +9,7 @@ defmodule NameSilo.Request do
   @type httpoison_returns :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
 
   alias NameSilo.Model.{ApiError, RequestError}
+  alias NameSilo.Config
 
   def call_api(operation, queries \\ %{}) do
     query_str = queries |> rebuild_queries() |> URI.encode_query()
@@ -40,9 +41,18 @@ defmodule NameSilo.Request do
     queries
   end
 
+  # 此处的 options 参数暂时是空的。
+  @default_httpoison_options []
+
   @spec send(binary, method, map) :: httpoison_returns
   def send(url, method, _data \\ %{}) do
-    apply(HTTPoison, method, [url, []])
+    timeout = Config.timeout()
+    recv_timeout = Config.recv_timeout()
+
+    opitons =
+      Keyword.merge(@default_httpoison_options, timeout: timeout, recv_timeout: recv_timeout)
+
+    apply(HTTPoison, method, [url, [], opitons])
   end
 
   @spec parse_response(httpoison_returns) ::
