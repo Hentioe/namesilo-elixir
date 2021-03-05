@@ -53,6 +53,8 @@ defmodule NameSilo do
     required: ["domain", "current_host", "new_host", "ip1"]
   )
 
+  def_api("getDomainInfo", required: ["domain"])
+  def_api("changeNameServers", required: ["domain", "ns1", "ns2"])
   def_api("deleteRegisteredNameServer", required: ["domain", "current_host"])
   def_api("dnsListRecords", required: ["domain"])
   def_api("dnsAddRecord", required: ["domain", "rrtype", "rrhost", "rrvalue"])
